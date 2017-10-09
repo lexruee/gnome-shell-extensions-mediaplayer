@@ -128,6 +128,11 @@ const Settings = {
         tab: "i",
         label: _("Show a Play Status Icon for each Media Player")
     },
+    'close-button': {
+        type: "b",
+        tab: "i",
+        label: _("Show a Close Button for each Media Player")
+    },
     'hide-aggindicator': {
         type: "b",
         tab: "i",
