@@ -136,7 +136,7 @@ var PlayerMenu = new Lang.Class({
         })
     });
 
-    this.actor.insert_child_at_index(this._playerCloseIcon, 0);
+    this.actor.insert_child_at_index(this._playerCloseIcon, 2);
     this.actor.insert_child_at_index(this._playStatusIcon, 3);
     this.menu = new SubMenu(this.actor, this._triangle, true);
     this.menu.connect('open-state-changed', Lang.bind(this, this._subMenuOpenStateChanged));
