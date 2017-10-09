@@ -114,5 +114,10 @@
         <summary>Show a Play Status Icon for each Player</summary>
         <description>Show a Play Status Icon for each Player.</description>
     </key>
+    <key name="close-button" type="b">
+        <default>false</default>
+        <summary>Show a Close Button for each Player</summary>
+        <description>Show a Close Button for each Player.</description>
+    </key>
   </schema>
 </schemalist>
