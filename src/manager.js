@@ -104,11 +104,13 @@ var PlayerManager = new Lang.Class({
         this._settings.connect("changed::" + Settings.MEDIAPLAYER_CLOSE_BUTTON_KEY, Lang.bind(this, function() {
             let showCloseIcon = this._settings.get_boolean(Settings.MEDIAPLAYER_CLOSE_BUTTON_KEY);
             for (let owner in this._players) {
-                let playerItem = this._players[owner];
-                if (showCloseIcon)
-                    playerItem.ui.showCloseIcon();
+                let item = this._players[owner];
+                let isBroken = item.player.playerIsBroken;
+
+                if (showCloseIcon && !isBroken)
+                    item.ui.showCloseIcon();
                 else
-                    playerItem.ui.hideCloseIcon();
+                    item.ui.hideCloseIcon();
             }
         }));
     },
@@ -221,6 +223,11 @@ var PlayerManager = new Lang.Class({
           else if (owner) {
               let player = new Player.MPRISPlayer(busName, owner);
               let ui = new UI.PlayerUI(player);
+
+              let showCloseIcon = this._settings.get_boolean(Settings.MEDIAPLAYER_CLOSE_BUTTON_KEY);
+              if (showCloseIcon && !player.playerIsBroken)
+                  ui.showCloseIcon();
+
               this._players[owner] = {
                 player: player,
                 ui: ui,
