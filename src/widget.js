@@ -128,9 +128,55 @@ var PlayerMenu = new Lang.Class({
   _init: function(label, wantIcon) {
     this.parent(label, wantIcon);
     this._playStatusIcon = new St.Icon({style_class: 'popup-menu-icon'});
+    this._playerCloseIconClicked = false;
+    this._playerCloseIcon = new St.Bin({
+        child: new St.Icon({
+            icon_name: 'window-close-symbolic',
+            style_class: 'popup-menu-icon'
+        })
+    });
+
+    this.actor.insert_child_at_index(this._playerCloseIcon, 0);
     this.actor.insert_child_at_index(this._playStatusIcon, 3);
     this.menu = new SubMenu(this.actor, this._triangle, true);
     this.menu.connect('open-state-changed', Lang.bind(this, this._subMenuOpenStateChanged));
+  },
+
+  hideCloseIcon: function() {
+    this._playerCloseIcon.hide();
+  },
+
+  showCloseIcon: function() {
+    this._playerCloseIcon.show();
+  },
+
+  _subMenuOpenStateChanged: function(menu, open) {
+    if (this._playerCloseIconClicked) {
+        return Clutter.EVENT_STOP;
+    }
+    return this.parent(menu, open);
+  },
+
+  _onButtonPressEvent: function(actor, event) {
+    let [bx, by] = this._playerCloseIcon.get_transformed_position();
+    let [width, height] = this._playerCloseIcon.get_transformed_size();
+    let [x, y] = event.get_coords();
+
+    this._playerCloseIconClicked = false;
+    // check if the user clicked on the close icon
+    if (bx <= x && x <= (bx + width) && by <= y && y <= (by + height) ) {
+        this._playerCloseIconClicked = true;
+        this.emit('player-close');
+    }
+    return this.parent(actor, event);
+  },
+
+  _onButtonReleaseEvent: function (actor, event) {
+    if (this._playerCloseIconClicked) {
+        this._playerCloseIconClicked = false;
+        return Clutter.EVENT_STOP;
+    }
+    return this.parent(actor, event);
   },
 
   addMenuItem: function(item) {
