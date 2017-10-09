@@ -100,6 +100,17 @@ var PlayerManager = new Lang.Class({
                 }
             }
         ));
+
+        this._settings.connect("changed::" + Settings.MEDIAPLAYER_CLOSE_BUTTON_KEY, Lang.bind(this, function() {
+            let showCloseIcon = this._settings.get_boolean(Settings.MEDIAPLAYER_CLOSE_BUTTON_KEY);
+            for (let owner in this._players) {
+                let playerItem = this._players[owner];
+                if (showCloseIcon)
+                    playerItem.ui.showCloseIcon();
+                else
+                    playerItem.ui.hideCloseIcon();
+            }
+        }));
     },
 
     get activePlayer() {
