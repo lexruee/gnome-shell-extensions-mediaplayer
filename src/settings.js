@@ -37,6 +37,7 @@ var MEDIAPLAYER_HIDE_AGGINDICATOR_KEY = 'hide-aggindicator';
 var MEDIAPLAYER_POSITION_KEY = 'position';
 var MEDIAPLAYER_PLAYLISTS_KEY = 'playlists';
 var MEDIAPLAYER_STOP_BUTTON_KEY = 'stop-button';
+var MEDIAPLAYER_CLOSE_BUTTON_KEY = 'close-button';
 var MEDIAPLAYER_BUTTON_ICON_STYLE_KEY = 'button-icon-style';
 var MEDIAPLAYER_PLAYLIST_TITLE_KEY = 'playlist-title';
 var MEDIAPLAYER_TRACKLIST_KEY = 'tracklist';
