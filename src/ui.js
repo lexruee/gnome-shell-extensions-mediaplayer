@@ -42,6 +42,7 @@ var PlayerUI = new Lang.Class({
   _init: function(player) {
     this.parent('', true);
     this.hidePlayStatusIcon();
+    this.hideCloseIcon();
     this.player = player;
     this.setCoverIconAsync = Util.setCoverIconAsync;
     this._updateId = player.connect('player-update', Lang.bind(this, this.update));
