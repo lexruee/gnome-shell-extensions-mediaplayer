@@ -861,6 +861,14 @@ var MPRISPlayer = new Lang.Class({
       }
     },
 
+    close: function() {
+        if (this.app) {
+            let windows = this.app.get_windows();
+            for (let i = 0; i < windows.length; i++)
+                windows[i].delete(global.get_current_time());
+        }
+    },
+
     _refreshProperties: function(newState) {
       // Check properties
       // Many players have a habit of changing properties without emitting
