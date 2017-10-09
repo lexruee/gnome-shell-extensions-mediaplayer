@@ -45,7 +45,7 @@ var PlayerUI = new Lang.Class({
     this.player = player;
     this.setCoverIconAsync = Util.setCoverIconAsync;
     this._updateId = player.connect('player-update', Lang.bind(this, this.update));
-    this._closeId = this.connect('player-close', Lang.bind(this.player, this.player.close));
+    this._closeId = this.connect('player-close', Lang.bind(this.player, this.player.quit));
 
     this.oldShouldShow = null;
 
