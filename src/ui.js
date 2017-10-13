@@ -25,6 +25,7 @@ const Gtk = imports.gi.Gtk;
 const Lang = imports.lang;
 const St = imports.gi.St;
 const Main = imports.ui.main;
+const Mainloop = imports.mainloop;
 
 const Gettext = imports.gettext.domain('gnome-shell-extensions-mediaplayer');
 const _ = Gettext.gettext;
@@ -46,7 +47,10 @@ var PlayerUI = new Lang.Class({
     this.player = player;
     this.setCoverIconAsync = Util.setCoverIconAsync;
     this._updateId = player.connect('player-update', Lang.bind(this, this.update));
-    this._closeId = this.connect('player-close', Lang.bind(this.player, this.player.quit));
+    this._closeId = this.connect('player-close', Lang.bind(this, function() {
+        this.player.stop();
+         Mainloop.timeout_add_seconds(0.5, Lang.bind(this.player, this.player.quit));
+    }));
 
     this.oldShouldShow = null;
 
