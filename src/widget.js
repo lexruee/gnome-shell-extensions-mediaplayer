@@ -1164,7 +1164,7 @@ var TracklistItem = new Lang.Class({
         // No need to connect button signals.
         this._ratingsIcon.icon_name = 'go-jump-symbolic';
         this._unRateButton.show();
-        this._loveButton.label = _("Tired… (Can't be Changed)");
+        this._loveButton.label = _("Tired…");
         this._loveButton.reactive = false;
         this._unRateButton.reactive = false;
         this._banButton.hide();
